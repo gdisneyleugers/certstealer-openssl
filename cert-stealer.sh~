@@ -18,7 +18,8 @@ keytool -v -importkeystore -srckeystore $ks -srcalias $keyring.key -destkeystore
 openssl pkcs12 -in $keyring.p12 -out $keyring.key -passin pass:$passwd
 echo "Stealing CA"
 cat $keyring.key >> $keyring.pem
-openssl x509 -inform pem -in $keyring.pem -out ca-$keyring.crt -signkey $keyring.key -CA $keyring.key -CAcreateserial 
+openssl x509 -inform pem -in $keyring.pem -out ca-$keyring.crt -signkey $keyring.key -CA $keyring.key -CAcreateserial -passin pass:$passwd
+
 
 
 
